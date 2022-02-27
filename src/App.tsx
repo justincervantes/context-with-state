@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { AppContext } from './context/AppContext';
+import Display from './Display';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [singleString, setSingleString] = useState('\"initial state of string\"');
+	const [arrayOfObject, setArrayOfObject] = useState([{ type: 'knight', color: 'white' }, {
+		type: 'queen',
+		color: 'black'
+	}]);
+	const [twoDArrayOfObject, setTwoDArrayOfObject] = useState([[{ type: 'rook', color: 'white' }, {
+		type: 'bishop',
+		color: 'white'
+	}, { type: 'knight', color: 'white' }, { type: 'king', color: 'white' }], [{
+		type: 'pawn',
+		color: 'white'
+	}, { type: 'pawn', color: 'white' }, {
+		type: 'pawn',
+		color: 'white'
+	}, { type: 'pawn', color: 'white' }]]);
+	const value = {
+		singleString,
+		setSingleString,
+		arrayOfObject,
+		setArrayOfObject,
+		twoDArrayOfObject,
+		setTwoDArrayOfObject
+	};
+	return (
+		<div className='App'>
+			<AppContext.Provider value={value}>
+				<Display></Display>
+			</AppContext.Provider>
+		</div>
+	);
 }
 
 export default App;
